@@ -9,7 +9,7 @@ clean:
 out.bmp: out.ppm
 	ppmtobmp out.ppm > out.bmp && >&2 echo "Done ppmtobmp" || >&2 echo "Failed ppmtobmp"
 out.ppm:
-	( echo "P6"; echo "$W $H"; echo "255" ) > out.ppm && >&2 echo "Done writing header" || >&2 "Failed writing header"; \
+	( echo "P$P"; echo "$W $H"; echo "$D" ) > out.ppm && >&2 echo "Done writing header" || >&2 "Failed writing header"; \
 	for i in `seq $H`; do \
 		dd status=none if=/dev/$S bs=3 count=$W >> out.ppm || >&2 echo "dd failed at line $$i out of $H"; \
 		>/dev/null expr $$i % 100 || >&2 echo "done $$i lines out of $H"; \
